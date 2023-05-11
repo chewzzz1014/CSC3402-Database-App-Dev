@@ -1,15 +1,15 @@
 package com.csc3402.lab.staff.controller;
 
-import com.csc3402.lab.staff.model.Staff;
 import com.csc3402.lab.staff.repository.StaffRepository;
+import com.csc3402.lab.staff.model.Staff;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/staffs")
@@ -27,12 +27,13 @@ public class StaffController {
     }
 
     @GetMapping("signup")
-    public String showSignUpForm(Staff staff) {
+    public String showSignUpForm(Staff staff){
         return "add-staff";
     }
 
+    @PostMapping("add")
     public String addStaff(@Valid Staff staff, BindingResult result, Model model) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "add-staff";
         }
 
@@ -40,6 +41,7 @@ public class StaffController {
         return "redirect:list";
     }
 
+    // UPDATE STAFF
     @GetMapping("update")
     public String showUpdateMainForm(Model model) {
         model.addAttribute("staffs", staffRepository.findAll());
@@ -51,7 +53,6 @@ public class StaffController {
         Staff staff = staffRepository.findById((int) id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
         model.addAttribute("staff", staff);
-        model.addAttribute("departments", departmentRepository.findAll());
         return "update-staff";
     }
 
@@ -67,6 +68,7 @@ public class StaffController {
         return "list-staff";
     }
 
+    // DELETE STAFF
     @GetMapping("delete")
     public String showDeleteMainForm(Model model) {
         model.addAttribute("staffs", staffRepository.findAll());
@@ -77,11 +79,8 @@ public class StaffController {
     public String deleteStaff(@PathVariable("id") long id, Model model) {
         Staff staff = staffRepository.findById((int) id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
-
-
         staffRepository.delete(staff);
         model.addAttribute("staffs", staffRepository.findAll());
-
         return "list-staff";
     }
 }
