@@ -67,4 +67,21 @@ public class StaffController {
         return "list-staff";
     }
 
+    @GetMapping("delete")
+    public String showDeleteMainForm(Model model) {
+        model.addAttribute("staffs", staffRepository.findAll());
+        return "choose-staff-to-delete";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteStaff(@PathVariable("id") long id, Model model) {
+        Staff staff = staffRepository.findById((int) id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
+
+
+        staffRepository.delete(staff);
+        model.addAttribute("staffs", staffRepository.findAll());
+
+        return "list-staff";
+    }
 }
