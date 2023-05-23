@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>List Projects of a Staff</title>
+</head>
+<body>
+
+<h2>List of Projects</h2>
+<table>
+  <thead>
+  <tr th:object="${staff}">
+    <h3 th:text="${staff.fname}"> </h3>
+    <th> Project Name</th>
+    <th> Start Date </th>
+    <th> End Date </th>
+    <th> Role </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:object="${staffProjects}" th:if="${staffProjects.empty}">
+    <td colspan="2"> No Projects Available </td>
+  </tr>
+
+  <tr th:each="staffProject : ${staffProjects}">
+    <td><span th:text="${staffProject.project?.projName}"> </span></td>
+    <td><span th:text="${staffProject.startDate}"> </span></td>
+    <td><span th:text="${staffProject.endDate}"> </span></td>
+    <td><span th:text="${staffProject.role}"> </span></td>
+  </tr>
+  </tbody>
+</table>
+<a href = "#" th:href ="@{/}"> Back to Main Menu</a>
+</body>
+</html>
