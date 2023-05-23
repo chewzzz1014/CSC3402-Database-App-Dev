@@ -30,7 +30,7 @@ public class StaffController {
 
     @GetMapping("signup")
     public String showSignUpForm(Staff staff, Model model){
-        model.addAttribute("departments", departmentRepository.findAll())
+        model.addAttribute("departments", departmentRepository.findAll());
         return "add-staff";
     }
 
