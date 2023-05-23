@@ -9,6 +9,20 @@ public class Department {
     @Column(name = "dept_id")
     private Integer deptId;
 
+    @Column(name = "dept_name")
+    private String deptName;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private Set<Staff> staffs;
+
+
+    // constructors
     public Department() {
         super();
     }
@@ -20,6 +34,8 @@ public class Department {
         this.phone = phone;
     }
 
+
+    // getters
     public Integer getDeptId() {
         return deptId;
     }
@@ -32,6 +48,16 @@ public class Department {
         return address;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public Set<Staff> getStaffs() {
+        return staffs;
+    }
+
+
+    // setters
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
@@ -48,10 +74,12 @@ public class Department {
         this.phone = phone;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setStaffs(Set<Staff> staffs) {
+        this.staffs = staffs;
     }
 
+
+    // toString
     @Override
     public String toString() {
         return "Department{" +
@@ -61,16 +89,4 @@ public class Department {
                 ", phone='" + phone + '\'' +
                 '}';
     }
-
-    @Column(name = "dept_name")
-    private String deptName;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "phone")
-    private String phone;
-
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private Set<Staff> staffs;
 }
