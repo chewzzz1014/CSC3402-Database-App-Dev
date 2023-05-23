@@ -56,6 +56,14 @@
                             th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"
                             class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-form-label">Department</label>
+                        <select th:field="*{department}">
+                            <option value=""> Choose Department.. </option>
+                            <option th:each="d: ${departments}" th:value="${d.deptId}"
+                                    th:text="${d.deptName}"/>
+                        </select>
+                    </div>
                     <div class="container">
                         <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
                         <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
