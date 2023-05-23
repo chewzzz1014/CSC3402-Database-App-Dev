@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Assign Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+        crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css"
+        integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw=="
+        crossorigin="anonymous" />
+</head>
+<body>
+<div class="container my-5">
+  <h3> Assign Project</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="col-md-8">
+        <form action="#"
+              th:action="@{/staffs/staffproject/{staffid}(staffid=${staff.staffId})}"
+              th:object="${staffProject}" th:method="post">
+          <div class="row">
+            <!--
+                <div class="form-group col-md-6">
+                    <label for="startDate" class="col-form-label">Start Date</label> <input
+                        type="text" th:field="*{startDate}" class="form-control" id="startDate"
+                        placeholder="startDate" name=startDate> <span
+                        th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"
+                        class="text-danger"></span>
+                </div> -->
+
+            <div class="form-group col-md-6">
+              <h5>Start Date</h5>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button type="button" id="toggle" class="input-group-text">
+                    <i class="fa fa-calendar-alt"></i>
+                  </button>
+                </div>
+                <input type="text" th:field="*{startDate}" id="startDate" class="form-control" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <h5>End Date</h5>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button type="button" id="toggle2" class="input-group-text">
+                    <i class="fa fa-calendar-alt"></i>
+                  </button>
+                </div>
+                <input type="text" th:field="*{endDate}" id="endDate" class="form-control" autocomplete="off">
+              </div>
+            </div>
+
+            <!-- <div class="form-group col-md-6">
+                <label for="endDate" class="col-form-label">End Date</label> <input
+                    type="text" th:field="*{endDate}" class="form-control" id="endDate"
+                    placeholder="End Date" name=endDate> <span
+                    th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"
+                    class="text-danger"></span>
+            </div> -->
+
+            <div class="form-group col-md-6">
+              <label class="col-form-label">Role</label>
+
+              <select th:field="*{role}" id="role" name=role>
+                <option value="">Choose Role..</option>
+                <option value="database designer">Database Designer</option>
+                <option value="application developer">Application Developer</option>
+                <option value="data analyst">Data Analyst</option>
+                <option value="data engineer">Data Engineer</option>
+                <option value="data scientist">Data Scientist</option>
+                <option value="project manager">Project Manager</option>
+                <option value="database administrator">Database Administrator</option>
+              </select>
+
+            </div>
+            <div class="form-group col-md-8">
+              <label class="col-form-label">Project</label>
+              <select th:field="*{project}" id="proj" name=proj>
+                <option value=""> Assign Project.. </option>
+                <option th:each="proj: ${projects}"
+                        th:value="${proj.projectId}"
+                        th:text="${proj.projName}"/>
+              </select>
+
+            </div>
+
+            <div class="form-group col-md-8">
+              <input type="submit" class="btn btn-primary"
+                     value="Assign Project">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+
+<script>
+  $(function(){
+    $('#startDate').datetimepicker({
+      format:'d/m/Y',
+      formatDate: 'd/m/Y',
+      onShow:function( ct ){
+        this.setOptions({
+          maxDate:$('#endDate').val()?$('#endDate').val():false
+        })
+      },
+      timepicker:false
+    });
+    $('#endDate').datetimepicker({
+      format:'d/m/Y',
+      formatDate: 'd/m/Y',
+      onShow:function( ct ){
+        this.setOptions({
+          minDate:$('#startDate').val()?$('#startDate').val():false
+        })
+      },
+      timepicker:false
+    });
+  });
+</script>
+
+</body>
+</html>
