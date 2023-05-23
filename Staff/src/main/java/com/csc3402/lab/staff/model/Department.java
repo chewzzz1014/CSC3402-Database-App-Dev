@@ -1,5 +1,6 @@
 package com.csc3402.lab.staff.model;
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Department {
@@ -9,6 +10,7 @@ public class Department {
     private Integer deptId;
 
     public Department() {
+        super();
     }
 
     public Department(Integer deptId, String deptName, String address, String phone) {
@@ -68,4 +70,7 @@ public class Department {
 
     @Column(name = "phone")
     private String phone;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private Set<Staff> staffs;
 }

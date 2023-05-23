@@ -1,6 +1,6 @@
 package com.csc3402.lab.staff.controller;
-
 import com.csc3402.lab.staff.repository.StaffRepository;
+import com.csc3402.lab.staff.repository.DepartmentRepository;
 import com.csc3402.lab.staff.model.Staff;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/staffs")
 public class StaffController {
     private final StaffRepository staffRepository;
+    private final DepartmentRepository departmentRepository;
 
-    public StaffController(StaffRepository staffRepository) {
+    public StaffController(StaffRepository staffRepository, DepartmentRepository departmentRepository) {
         this.staffRepository = staffRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @GetMapping("list")
@@ -27,7 +29,8 @@ public class StaffController {
     }
 
     @GetMapping("signup")
-    public String showSignUpForm(Staff staff){
+    public String showSignUpForm(Staff staff, Model model){
+        model.addAttribute("departments", departmentRepository.findAll())
         return "add-staff";
     }
 
@@ -41,7 +44,6 @@ public class StaffController {
         return "redirect:list";
     }
 
-    // UPDATE STAFF
     @GetMapping("update")
     public String showUpdateMainForm(Model model) {
         model.addAttribute("staffs", staffRepository.findAll());
@@ -52,7 +54,9 @@ public class StaffController {
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Staff staff = staffRepository.findById((int) id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
+
         model.addAttribute("staff", staff);
+        model.addAttribute("departments", departmentRepository.findAll());
         return "update-staff";
     }
 
@@ -65,10 +69,9 @@ public class StaffController {
 
         model.addAttribute("staffs", staffRepository.findAll());
         staffRepository.save(staff);
-        return "list-staff";
+        return "index";
     }
 
-    // DELETE STAFF
     @GetMapping("delete")
     public String showDeleteMainForm(Model model) {
         model.addAttribute("staffs", staffRepository.findAll());
@@ -81,6 +84,6 @@ public class StaffController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
         staffRepository.delete(staff);
         model.addAttribute("staffs", staffRepository.findAll());
-        return "list-staff";
+        return "index";
     }
 }
