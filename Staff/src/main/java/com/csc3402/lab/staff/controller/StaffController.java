@@ -69,7 +69,8 @@ public class StaffController {
 
         model.addAttribute("staffs", staffRepository.findAll());
         staffRepository.save(staff);
-        return "index";
+//        return "index";
+        return "list-staff";
     }
 
     @GetMapping("delete")
@@ -84,6 +85,7 @@ public class StaffController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff Id:" + id));
         staffRepository.delete(staff);
         model.addAttribute("staffs", staffRepository.findAll());
-        return "index";
+//        return "index";
+        return "list-staff";
     }
 }
