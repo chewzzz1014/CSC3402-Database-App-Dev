@@ -50,8 +50,14 @@
                     <td th:text="${staff.fname}"></td>
                     <td th:text="${staff.lname}"></td>
                     <td th:text="${staff.salary}"></td>
-                    <td><a th:href="@{/staffs/delete/{id}(id=${staff.staffId})}"
-                           class="btn btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a></td>
+                    <td>
+                        <a th:href="@{/staffs/delete/{id}(id=${staff.staffId})}"
+                           class="btn btn-danger"
+                           onClick="if(!confirm('Delete this staff?')) return false"
+                        >
+                            Delete<i class="fas fa-user-times ml-2"></i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -59,6 +65,5 @@
 
     </div>
 </div>
-
 </body>
 </html>
