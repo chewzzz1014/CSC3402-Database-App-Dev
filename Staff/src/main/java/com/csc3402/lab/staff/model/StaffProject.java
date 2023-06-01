@@ -45,7 +45,7 @@ public class StaffProject {
         return id;
     }
 
-    public void setId(StaffProjectId id) {
+    public void setId() {
         this.id = id;
     }
 

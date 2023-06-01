@@ -7,6 +7,7 @@ import com.csc3402.lab.staff.model.Staff;
 import com.csc3402.lab.staff.model.StaffProject;
 import com.csc3402.lab.staff.model.Project;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import java.util.*;
 public class StaffController {
     private final StaffRepository staffRepository;
     private final DepartmentRepository departmentRepository;
+    @Autowired
     private final ProjectRepository projectRepository;
     private final StaffProjectRepository staffProjectRepository;
 
@@ -123,7 +125,7 @@ public class StaffController {
                                      @RequestParam String endDate, @RequestParam String role, @Valid StaffProject staffProject,
                                      BindingResult result, Model model) {
         if (result.hasErrors()) {
-            staffProject.setId(staffProject.getId());
+            staffProject.setId();
             return "index";
         }
 
