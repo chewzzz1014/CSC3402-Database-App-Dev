@@ -2,6 +2,7 @@ package com.csc3402.lab.staff.model;
 import java.util.*;
 import jakarta.persistence.*;
 
+@Entity
 public class Project {
 
     public Project() {

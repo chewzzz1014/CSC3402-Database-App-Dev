@@ -123,7 +123,7 @@ public class StaffController {
                                      @RequestParam String endDate, @RequestParam String role, @Valid StaffProject staffProject,
                                      BindingResult result, Model model) {
         if (result.hasErrors()) {
-            staffProject.setId();
+            staffProject.setId(staffProject.getId());
             return "index";
         }
 

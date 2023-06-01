@@ -1,6 +1,7 @@
 package com.csc3402.lab.staff.model;
 
 import jakarta.persistence.*;
+import com.csc3402.lab.staff.model.*;
 
 @Entity
 public class StaffProject {
