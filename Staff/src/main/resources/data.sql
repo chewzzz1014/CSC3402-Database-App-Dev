@@ -24,3 +24,10 @@ where staff_id = 3;
 
 update staff set dept_id = 4
 where staff_id = 4;
+
+insert into project (project_name, cost) values ('Visual Analytics', 50000);
+insert into project (project_name, cost) values ('MyAgeing', 20000);
+insert into project (project_name, cost) values ('Video Retrieval', 87000);
+insert into project (project_name, cost) values ('Cyber Security', 30000);
+insert into project (project_name, cost) values ('Video Surveillance', 35000);
+insert into project (project_name, cost) values ('Data Analytics', 27000);
